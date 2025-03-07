@@ -39,6 +39,7 @@ export class MemberRegistrationComponent {
   submitForm() {
     if (this.form.valid) {
       alert('Form submitted successfully!');
+      this.form.reset();
     } else {
       alert('Please fill in the required fields.');
     }
