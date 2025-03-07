@@ -26,7 +26,7 @@ export class MemberRegistrationComponent {
         validators.push(Validators.email); // Email format validation
       } 
       if (field.name.toLowerCase() === 'mobile') {
-        validators.push(Validators.pattern('^\\+?[0-9]{10,12}$')); // Exactly 10 digits
+        validators.push(Validators.pattern('^(\\+91\\d{10}|\\d{10})$')); // Exactly 10 digits and 12 digits with country code
       } 
       if (field.name.toLowerCase() === 'address') {
         validators.push(Validators.minLength(5)); // Minimum 10 characters
