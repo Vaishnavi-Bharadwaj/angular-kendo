@@ -1,0 +1,50 @@
+<div class="container">
+  <h1 class="title">Member Registration</h1>
+  <div class="form-box">
+    <form [formGroup]="form" (ngSubmit)="submitForm()" class="registration-form">
+      <div *ngFor="let field of fields; let i=index" class="form-group">
+        <label [for]="field.name">{{ field.name }}</label>
+        <input
+          *ngIf="field.name.toLowerCase()!=='address'"
+          kendoTextBox
+          [formControlName]="field.name.toLowerCase()"
+          [id]="field.name"
+        />
+        
+        <textarea
+          *ngIf="field.name.toLowerCase()==='address'"
+          kendoTextArea
+          [formControlName]="field.name.toLowerCase()"
+          [id]="field.name"
+        ></textarea>
+
+        <div *ngIf="isFieldInvalid(field.name.toLowerCase())" class="error">
+          <span *ngIf="form.get(field.name.toLowerCase())?.errors?.['required']">
+            {{ field.name }} is required.
+          </span>
+
+          <span *ngIf="field.name.toLowerCase() === 'name' && form.get(field.name.toLowerCase())?.errors?.['pattern']">
+            Invalid {{ field.name }} format.
+          </span>
+          
+          <span *ngIf="form.get(field.name.toLowerCase())?.errors?.['email']">
+            Enter a valid email address.
+          </span>
+          
+          <span *ngIf="field.name.toLowerCase() === 'mobile' && form.get(field.name.toLowerCase())?.errors?.['pattern']">
+            Invalid {{ field.name }} format.
+          </span>
+
+          <span *ngIf="form.get(field.name.toLowerCase())?.errors?.['minlength']">
+            {{ field.name }} should be at least 10 characters.
+          </span>
+        </div>
+      </div>
+  
+      <button kendoButton type="submit" [disabled]="form.invalid || isFormEmpty()" class="submit-btn">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+

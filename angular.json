@@ -30,6 +30,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@progress/kendo-theme-default/dist/all.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -100,5 +101,13 @@
         }
       }
     }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
+  "cli": {
+    "analytics": "f68a6ac7-e9b1-4031-b47d-a16f48427d07"
   }
 }

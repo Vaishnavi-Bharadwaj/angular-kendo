@@ -1,0 +1,43 @@
+<div class="container">
+  <h1 class="title">Form Configuration</h1>
+  
+  <!-- Form configuration container -->
+  <div class="form-config-container">
+    <div class="grid-header">
+      <div class="header-item1">SHOW FIELD</div>
+      <div class="header-item2"></div>
+      <div class="header-item3">REQUIRED FIELD</div>
+    </div>
+
+    <!-- Reorderable grid rows -->
+    <div
+      class="grid-row"
+      *ngFor="let field of fields; let i = index"
+      [draggable]="true"
+      (dragstart)="onDragStart($event, i)"
+      (dragover)="onDragOver($event)"
+      (drop)="onDrop($event, i)"
+      (dragend)="onDragEnd($event)">
+      <div class="grid-cell">
+        <input type="checkbox" [(ngModel)]="field.show" />
+      </div>
+      <div class="grid-cell" id="field-name">{{ field.name }}</div>
+      <div class="grid-cell">
+        <input type="checkbox" [(ngModel)]="field.required" [disabled]="!field.show"/>
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <button kendoButton type="submit" class="save-btn" (click)="saveChanges()">Save Changes</button>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
