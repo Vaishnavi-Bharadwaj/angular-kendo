@@ -29,7 +29,7 @@ export class MemberRegistrationComponent {
         validators.push(Validators.pattern('^(\\+91\\d{10}|\\d{10})$')); // Exactly 10 digits and 12 digits with country code
       } 
       if (field.name.toLowerCase() === 'address') {
-        validators.push(Validators.minLength(5)); // Minimum 10 characters
+        validators.push(Validators.minLength(5)); // Minimum 5 characters
       }
   
       this.form.addControl(field.name.toLowerCase(), this.fb.control('', validators));
