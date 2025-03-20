@@ -3,7 +3,9 @@
   <div class="form-box">
     <form [formGroup]="form" (ngSubmit)="submitForm()" class="registration-form">
       <div *ngFor="let field of fields; let i=index" class="form-group">
-        <label [for]="field.name">{{ field.name }}</label>
+        <label [for]="field.name">{{ field.name }}
+          <span *ngIf="field.required" style="color: red;">*</span>
+        </label>
         <input
           *ngIf="field.name.toLowerCase()!=='address'"
           kendoTextBox
