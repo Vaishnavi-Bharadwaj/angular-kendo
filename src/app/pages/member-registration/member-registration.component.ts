@@ -8,28 +8,28 @@ import { FormConfigService } from 'src/app/services/form-config.service';
   styleUrls: ['./member-registration.component.scss']
 })
 export class MemberRegistrationComponent {
-  form: FormGroup; //holds the angular reactive form group to manage form control and validation
-  fields: any[] = []; //array to store the fields that will be displayed in the registration form
+  form: FormGroup; 
+  fields: any[] = []; 
 
-  constructor(private fb: FormBuilder, private configService: FormConfigService) // FormBuilder is used to manage the reactive forms and FormConfigService is used to fetch the form field configuration e.g. field names
+  constructor(private fb: FormBuilder, private configService: FormConfigService) 
   {
-    this.fields = this.configService.getFields().filter(f => f.show); // selecting only those that have their show property set to true
-    this.form = this.fb.group({}); //form group to store the fields from the fields array which will be populated later 
+    this.fields = this.configService.getFields().filter(f => f.show); 
+    this.form = this.fb.group({}); 
   
     this.fields.forEach(field => {
-      let validators = field.required ? [Validators.required] : []; // Add required validation if needed
+      let validators = field.required ? [Validators.required] : []; 
   
       if (field.name.toLowerCase() === 'name') {
-        validators.push(Validators.pattern('^[a-zA-Z ]+$')); // Only letters and spaces
+        validators.push(Validators.pattern('^[a-zA-Z ]+$')); 
       } 
       if (field.name.toLowerCase() === 'email') {
-        validators.push(Validators.email); // Email format validation
+        validators.push(Validators.email); 
       } 
       if (field.name.toLowerCase() === 'mobile') {
-        validators.push(Validators.pattern('^(\\+91\\d{10}|\\d{10})$')); // Exactly 10 digits and 12 digits with country code
+        validators.push(Validators.pattern('^(\\+91\\d{10}|\\d{10})$')); 
       } 
       if (field.name.toLowerCase() === 'address') {
-        validators.push(Validators.minLength(5)); // Minimum 5 characters
+        validators.push(Validators.minLength(5)); 
       }
   
       this.form.addControl(field.name.toLowerCase(), this.fb.control('', validators));
