@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AbstractControl } from '@angular/forms';
 import { EncryptionService } from 'src/app/services/encryption.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-set-password',
   templateUrl: './set-password.component.html',
@@ -12,7 +12,7 @@ import { EncryptionService } from 'src/app/services/encryption.service';
 export class SetPasswordComponent {
   pwd_form: FormGroup; 
 
-  constructor(private fb: FormBuilder, private router: Router, private encryptionService: EncryptionService) {
+  constructor(private fb: FormBuilder, private router: Router, private encryptionService: EncryptionService, private toast:ToastrService) {
     this.pwd_form = this.fb.group({
       password: ['', [
         Validators.required,
@@ -46,17 +46,18 @@ export class SetPasswordComponent {
   
   submitPwdForm() {
     if (this.pwd_form.valid) {
-        const email = sessionStorage.getItem('email'); // Retrieve email
+        const email = sessionStorage.getItem('email'); 
         const password = this.pwd_form.get('password')?.value;
         if (email && password) {
             const encryptedPassword = this.encryptionService.encrypt(password);
-            sessionStorage.setItem(email, encryptedPassword); // Store password with email as key
+            sessionStorage.setItem(email, encryptedPassword); 
         }
+        this.toast.success('Your password has been set successfully. Please log in.', 'Success');
         this.router.navigate(['/login']);
     } else if (this.pwd_form.get('confirmpassword')?.errors?.['passwordMismatch']) {
         return;
     } else {
-        alert('Please fill in required details');
+        this.toast.warning('Please fill in all required fields.', 'Warning');
     }
   }
 

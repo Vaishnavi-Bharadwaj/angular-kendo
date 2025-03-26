@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormConfigService } from 'src/app/services/form-config.service';
 import { Router } from '@angular/router';
 import { EncryptionService } from 'src/app/services/encryption.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-member-registration',
   templateUrl: './member-registration.component.html',
@@ -13,7 +14,7 @@ export class MemberRegistrationComponent {
   form: FormGroup; 
   fields: any[] = []; 
 
-  constructor(private fb: FormBuilder, private configService: FormConfigService, private router:Router, private encryptionService: EncryptionService) 
+  constructor(private fb: FormBuilder, private configService: FormConfigService, private router:Router, private encryptionService: EncryptionService, private toast:ToastrService) 
   {
     this.fields = this.configService.getFields().filter(f => f.show); 
     this.form = this.fb.group({}); 
@@ -47,7 +48,7 @@ export class MemberRegistrationComponent {
       this.router.navigate(['/set-password']);
     } 
     else {
-      alert('Please fill in the required fields.');
+      this.toast.warning('Please fill in all required fields.', 'Warning');
     }
   }
 
