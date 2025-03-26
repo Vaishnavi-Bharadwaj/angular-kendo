@@ -1,0 +1,39 @@
+<div class="container">
+    <h1 class="title">Login</h1>
+    <div class="form-box">
+      <form [formGroup]="login_form" (ngSubmit)="submitLoginForm()" class="registration-form">
+        
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email">Email <span style="color: red;">*</span></label>
+          <input kendoTextBox type="email" formControlName="email" id="email" />
+          
+          <div *ngIf="isPwdFieldInvalid('email')" class="error">
+            <span *ngIf="login_form.get('email')?.errors?.['required']">Email is required.</span>
+            <span *ngIf="login_form.get('email')?.errors?.['email']">Invalid email format.</span>
+          </div>
+        </div>
+  
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password">Password <span style="color: red;">*</span></label>
+          <input kendoTextBox type="password" formControlName="password" id="password" />
+  
+          <div *ngIf="isPwdFieldInvalid('password')" class="error">
+            <span *ngIf="login_form.get('password')?.hasError('required')">
+              Password is required.
+            </span>
+            <span *ngIf="login_form.get('password')?.errors?.['passwordMismatch']">
+              Incorrect password.
+            </span>
+          </div>
+        </div>
+        
+        <button kendoButton type="submit" class="submit-btn">
+          Confirm
+        </button>
+        
+      </form>
+    </div>
+  </div>
+  

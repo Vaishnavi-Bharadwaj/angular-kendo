@@ -45,6 +45,8 @@
     "@progress/kendo-licensing": "^1.5.0",
     "@progress/kendo-svg-icons": "^4.0.0",
     "@progress/kendo-theme-default": "^10.2.0",
+    "crypto-js": "^4.2.0",
+    "ng-angular-popup": "^0.6.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
