@@ -9,8 +9,8 @@ export const authGuard = () => {
   if (authService.isLoggedIn()) {
     return true;
   } else {
-    router.navigate(['/login']);
-    toast.warning('Session expired. Please log in again.', 'Warning');
+    router.navigate(['/register']);
+    toast.warning('Session expired. Please register and log in again.', 'Warning');
     return false;
   }
 };
