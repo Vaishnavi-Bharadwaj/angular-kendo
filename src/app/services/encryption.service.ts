@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class EncryptionService {
-  private secretKey = environment.secretKey; // Change this to a secure key
+  private secretKey = environment.secretKey; 
 
   encrypt(data: string): string {
     return CryptoJS.AES.encrypt(data, this.secretKey).toString();
