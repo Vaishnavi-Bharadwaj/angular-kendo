@@ -10,13 +10,19 @@ import { ButtonModule } from '@progress/kendo-angular-buttons';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { SetPasswordComponent } from './pages/set-password/set-password.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormConfigurationComponent,
-    MemberRegistrationComponent
+    MemberRegistrationComponent,
+    SetPasswordComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     InputsModule,
     GridModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot()
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

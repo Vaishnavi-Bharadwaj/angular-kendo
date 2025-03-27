@@ -11,16 +11,16 @@ export class FormConfigService {
   private fields = [
     { name: 'Name', show: true, required: false },
     { name: 'Mobile', show: true, required: false},
-    { name: 'Email', show: true, required: false},
+    { name: 'Email', show: true, required: true},
     { name: 'Address', show: true, required: false},
   ];
 
   getFields() {
     return this.fields;
-    //return this.fields.sort((a, b) => a.order - b.order);
   }
 
   updateFields(fields: any[]) {
     this.fields = fields;
   }
+
 }
