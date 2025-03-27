@@ -42,8 +42,13 @@ export class MemberRegistrationComponent {
   submitForm() {
     if (this.form.valid) {
       const email = this.form.get('email')?.value;
+      const userName = this.form.get('name')?.value;
       if (email) {
         sessionStorage.setItem('email', email);
+      }
+      if (userName)
+      {
+        sessionStorage.setItem('name', userName);
       }
       this.router.navigate(['/set-password']);
     } 

@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { FormConfigService } from 'src/app/services/form-config.service'; 
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-form-configuration',
   templateUrl: './form-configuration.component.html',
@@ -13,7 +14,7 @@ export class FormConfigurationComponent {
   fields: any[] = [];
   draggedItemIndex: number | null = null;
   
-  constructor(private configService: FormConfigService, private router:Router) {
+  constructor(private configService: FormConfigService, private router:Router, private toast:ToastrService) {
     this.fields = JSON.parse(JSON.stringify(this.configService.getFields())); 
   }
 
@@ -54,7 +55,7 @@ export class FormConfigurationComponent {
 
   saveChanges() {
     this.configService.updateFields(this.fields);
-    alert('Configuration saved!');
+    this.toast.success('Configuration saved', 'Success');
     this.router.navigate(['/register']);
   }
 

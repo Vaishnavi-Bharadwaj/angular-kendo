@@ -11,11 +11,6 @@ export class AuthService {
     sessionStorage.setItem('loggedInUser', email);
   }
 
-  logout(): void {
-    sessionStorage.removeItem('loggedInUser');
-    this.router.navigate(['/login']);
-  }
-
   isLoggedIn(): boolean {
     return !!sessionStorage.getItem('loggedInUser');
   }
