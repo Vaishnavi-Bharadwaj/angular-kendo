@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormConfigService } from 'src/app/services/form-config.service';
 import { Router } from '@angular/router';
-import { EncryptionService } from 'src/app/services/encryption.service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-member-registration',
@@ -14,7 +13,7 @@ export class MemberRegistrationComponent {
   form: FormGroup; 
   fields: any[] = []; 
 
-  constructor(private fb: FormBuilder, private configService: FormConfigService, private router:Router, private encryptionService: EncryptionService, private toast:ToastrService) 
+  constructor(private fb: FormBuilder, private configService: FormConfigService, private router:Router, private toast:ToastrService) 
   {
     this.fields = this.configService.getFields().filter(f => f.show); 
     this.form = this.fb.group({}); 
@@ -43,6 +42,13 @@ export class MemberRegistrationComponent {
     if (this.form.valid) {
       const email = this.form.get('email')?.value;
       const userName = this.form.get('name')?.value;
+
+      const storedEmail = sessionStorage.getItem('email');
+      if (storedEmail === email) {
+          this.toast.warning('This email is already registered. Please use a different email.', 'Warning');
+          return;
+      }
+      
       if (email) {
         sessionStorage.setItem('email', email);
       }
@@ -59,10 +65,6 @@ export class MemberRegistrationComponent {
 
   isFieldInvalid(field: string): boolean {
     return !!this.form?.get(field)?.invalid && !!this.form?.get(field)?.touched;
-  }
-  
-  isFormEmpty(): boolean {
-    return Object.values(this.form.value).every(value => value === '' || value === null);
   }
   
 }

@@ -41,7 +41,7 @@ export class LoginComponent {
                 }
             } 
             else {
-              this.toast.error('No account found with this email.', 'Error'); 
+              this.toast.error('Invalid credentials', 'Error'); 
             } 
         }
         
